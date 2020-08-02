@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Star Wars</string>
+    <string name="title_first">Планеты</string>
+    <string name="title_second">Статистика</string>
+    <string name="planets_list_planet_name">Planet Name:</string>
+    <string name="planets_list_rotation_period">Rotation period:</string>
+    <string name="planets_list_orbital_period">Orbital Period:</string>
+    <string name="planets_list_diameter">Diameter:</string>
+    <string name="planets_list_climate">Climate:</string>
+    <string name="planets_list_gravity">Gravity:</string>
+    <string name="planets_list_terrain">Terrain:</string>
+    <string name="planets_list_surface_water">Surface Water:</string>
+    <string name="planets_list_population">Population:</string>
+    <string name="planets_list_residents">Residents:</string>
+    <string name="planets_list_films">Films:</string>
+    <string name="people_root_list_name">Name:</string>
+
+
+</resources>
