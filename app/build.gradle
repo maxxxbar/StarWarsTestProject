@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion '29.0.3'
 
     defaultConfig {
@@ -55,8 +55,6 @@ dependencies {
     /*Gson*/
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    /*Picasso*/
-    implementation 'com.squareup.picasso:picasso:2.71828'
     /*ReactiveNetwork*/
     implementation 'com.github.pwittchen:reactivenetwork-rx2:3.0.8'
 
