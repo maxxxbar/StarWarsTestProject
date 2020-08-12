@@ -1,196 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardViewPlanet"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:layout_margin="@dimen/card_view_main_all_margin"
-    tools:context=".PlanetActivity">
+<layout>
 
-    <ScrollView
+    <data>
+
+        <variable
+            name="activityPlanet"
+            type="com.example.starwars.entries.planets.Result" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/cardViewPlanet"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/card_view_main_all_margin"
+        tools:context=".PlanetActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:layout_height="match_parent">
 
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/viewRotationPeriod"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                android:text="@string/planets_list_rotation_period"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_margin="10dp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/viewOrbitalPeriod"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                android:text="@string/planets_list_orbital_period"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewRotationPeriod" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/viewDiameter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                android:text="@string/planets_list_diameter"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewOrbitalPeriod" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewRotationPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@string/planets_list_rotation_period"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/viewClimate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                android:text="@string/planets_list_climate"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewDiameter" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewOrbitalPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@string/planets_list_orbital_period"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewRotationPeriod" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/viewGravity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                android:text="@string/planets_list_gravity"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewClimate" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewDiameter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@string/planets_list_diameter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewOrbitalPeriod" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/viewTerrain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                android:text="@string/planets_list_terrain"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewGravity" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewClimate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@string/planets_list_climate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewDiameter" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/viewSurfaceWater"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                android:text="@string/planets_list_surface_water"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewTerrain" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewGravity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@string/planets_list_gravity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewClimate" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/viewPopulation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                android:text="@string/planets_list_population"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewSurfaceWater" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewTerrain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@string/planets_list_terrain"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewGravity" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/viewResidents"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                android:text="@string/planets_list_residents"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewPopulation" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewSurfaceWater"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@string/planets_list_surface_water"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewTerrain" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/viewFilms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                android:text="@string/planets_list_films"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewResidents" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewPopulation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@string/planets_list_population"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewSurfaceWater" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textViewRotationPeriod"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewResidents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@string/planets_list_residents"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewPopulation" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textViewOrbitalPeriod"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewRotationPeriod" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewFilms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@string/planets_list_films"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewResidents" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textViewDiameter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewOrbitalPeriod" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewRotationPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@{activityPlanet.rotationPeriod}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textViewPlanetClimate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewDiameter" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewOrbitalPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@{activityPlanet.orbitalPeriod}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewRotationPeriod" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textViewGravity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPlanetClimate" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewDiameter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@{activityPlanet.diameter}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewOrbitalPeriod" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textViewTerrain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewGravity" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewPlanetClimate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@{activityPlanet.climate}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewDiameter" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textViewSurfaceWater"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTerrain" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewGravity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@{activityPlanet.gravity}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPlanetClimate" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textViewPopulation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_view_all_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewSurfaceWater" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewTerrain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@{activityPlanet.terrain}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewGravity" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textViewResidents"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                app:layout_constraintStart_toEndOf="@+id/viewResidents"
-                app:layout_constraintTop_toBottomOf="@+id/viewResidents" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewSurfaceWater"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@{activityPlanet.surfaceWater}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTerrain" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textViewFilms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/viewResidents"
-                app:layout_constraintTop_toBottomOf="@+id/viewFilms" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewPopulation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_all_margin"
+                    android:text="@{activityPlanet.population}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewSurfaceWater" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewResidents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toEndOf="@+id/viewResidents"
+                    app:layout_constraintTop_toBottomOf="@+id/viewResidents" />
 
-</com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewFilms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/viewResidents"
+                    app:layout_constraintTop_toBottomOf="@+id/viewFilms" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
+

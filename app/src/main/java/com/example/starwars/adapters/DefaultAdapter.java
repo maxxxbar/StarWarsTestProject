@@ -50,7 +50,7 @@ public class DefaultAdapter extends RecyclerView.Adapter<DefaultAdapter.DefaultA
                 @Override
                 public void onClick(View v) {
                     if (onItemCLickListener != null) {
-                        onItemCLickListener.OnItemCLick(getAbsoluteAdapterPosition());
+                        onItemCLickListener.OnItemCLick(getAdapterPosition());
                     }
                 }
             });
