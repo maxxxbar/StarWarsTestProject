@@ -33,8 +33,9 @@ public class PlanetActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_planet);
         View view = binding.getRoot().getRootView();
-        textViewResidents = findViewById(R.id.textViewResidents);
-        textViewFilms = findViewById(R.id.textViewFilms);
+
+        textViewResidents = binding.textViewResidents;
+        textViewFilms = binding.textViewFilms;
 
         presenter = new PlanetActivityPresenter(this);
         view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
