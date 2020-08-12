@@ -28,23 +28,20 @@ public class PlanetsListDataSource extends PageKeyedDataSource<Integer, Result> 
     private RestAPI restAPI;
     private Application application;
 
-    public PlanetsListDataSource(@NonNull Application application, RestAPI restAPI) {
+    public PlanetsListDataSource( RestAPI restAPI) {
         this.restAPI = restAPI;
-        this.application = application;
     }
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Result> callback) {
         List<Result> resultList = new ArrayList<>();
         LoadingStatus loadingStatus = LoadingStatus.getInstance();
-        FirstFragmentViewModel viewModel = new FirstFragmentViewModel(application);
         restAPI.getPlanetsResult(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Planets>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        viewModel.setIsLoading(true);
                         loadingStatus.setLoading(true);
                         Log.d(TAG, "onSubscribe: " + loadingStatus.isLoading());
                     }
@@ -61,7 +58,6 @@ public class PlanetsListDataSource extends PageKeyedDataSource<Integer, Result> 
 
                     @Override
                     public void onComplete() {
-                        viewModel.setIsLoading(false);
                         loadingStatus.setLoading(false);
                         callback.onResult(resultList, null, 2);
                         Log.d(TAG, "onComplete: " + loadingStatus.isLoading());

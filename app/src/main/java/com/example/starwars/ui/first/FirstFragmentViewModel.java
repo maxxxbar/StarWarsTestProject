@@ -37,7 +37,7 @@ public class FirstFragmentViewModel extends AndroidViewModel {
         super(application);
         connection = APIConnection.getInstance();
         api = connection.createGet();
-        planetsListDataSourceFactory = new PlanetsListDataSourceFactory(application, api);
+        planetsListDataSourceFactory = new PlanetsListDataSourceFactory( api);
         dataSourceLiveData = planetsListDataSourceFactory.getMutableLiveData();
 
         PagedList.Config config = new PagedList.Config.Builder()

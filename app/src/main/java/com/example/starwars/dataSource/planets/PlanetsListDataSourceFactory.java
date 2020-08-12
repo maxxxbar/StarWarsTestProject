@@ -15,16 +15,15 @@ public class PlanetsListDataSourceFactory extends DataSource.Factory<Integer, Re
     private RestAPI restAPI;
     private Application application;
 
-    public PlanetsListDataSourceFactory(@NonNull Application application, RestAPI restAPI) {
+    public PlanetsListDataSourceFactory(RestAPI restAPI) {
         mutableLiveData = new MutableLiveData<>();
         this.restAPI = restAPI;
-        this.application = application;
     }
 
     @NonNull
     @Override
     public DataSource<Integer, Result> create() {
-        dataSource = new PlanetsListDataSource(application, restAPI);
+        dataSource = new PlanetsListDataSource(restAPI);
         mutableLiveData.postValue(dataSource);
         return dataSource;
     }
