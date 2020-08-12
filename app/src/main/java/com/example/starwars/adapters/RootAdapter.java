@@ -53,7 +53,7 @@ public class RootAdapter extends RecyclerView.Adapter<RootAdapter.RootAdapterVie
                 @Override
                 public void onClick(View v) {
                     if (onItemCLickListener != null) {
-                        onItemCLickListener.OnItemCLick(getAbsoluteAdapterPosition());
+                        onItemCLickListener.OnItemCLick(getAdapterPosition());
                     }
                 }
             });

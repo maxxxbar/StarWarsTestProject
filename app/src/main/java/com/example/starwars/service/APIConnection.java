@@ -1,5 +1,7 @@
 package com.example.starwars.service;
 
+import com.example.starwars.Extra;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -9,7 +11,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class APIConnection {
 
     private Retrofit retrofit;
-    private String BASE_URL = "https://swapi.dev/api/";
 
     private APIConnection() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
@@ -17,7 +18,7 @@ public class APIConnection {
         OkHttpClient.Builder client = new OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor);
         retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(Extra.SWAPI_BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client.build())

@@ -2,78 +2,74 @@ package com.example.starwars.ui.first;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.paging.PagedList;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.starwars.R;
-import com.example.starwars.adapters.PlanetsAdapter;
+import com.example.starwars.adapters.OnItemCLickListener;
+import com.example.starwars.adapters.planets.PlanetsAdapterNew;
+import com.example.starwars.databinding.FragmentFirstBinding;
 import com.example.starwars.entries.planets.Result;
 import com.example.starwars.ui.planetactivity.PlanetActivity;
 import com.google.gson.Gson;
 
-import java.util.List;
+public class FirstFragment extends Fragment {
 
-public class FirstFragment extends Fragment
-        implements FirstFragmentView {
-
-    private FirstFragmentPresenter presenter;
+    private FirstFragmentViewModel viewModel;
+    private FragmentFirstBinding binding;
+    private PlanetsAdapterNew planetsAdapterNew;
     private RecyclerView recyclerView;
-    private PlanetsAdapter planetsAdapter;
-    int firstVisibleItem, visibleItemCount, totalItemCount;
-    private int page = 1;
+    private final String TAG = getClass().getSimpleName();
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_first, container, false);
-        recyclerView = root.findViewById(R.id.recyclerViewPlanets);
+        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        viewModel = ViewModelProvider
+                .AndroidViewModelFactory
+                .getInstance(getActivity().getApplication())
+                .create(FirstFragmentViewModel.class);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(root.getContext());
+        LinearSnapHelper snapHelper = new LinearSnapHelper();
+
+        recyclerView = binding.recyclerViewPlanets;
         recyclerView.setLayoutManager(linearLayoutManager);
-        presenter = new FirstFragmentPresenter(this);
-        planetsAdapter = new PlanetsAdapter();
-        planetsAdapter.setOnItemCLickListener(new PlanetsAdapter.OnItemCLickListener() {
+        snapHelper.attachToRecyclerView(recyclerView);
+        planetsAdapterNew = new PlanetsAdapterNew();
+        viewModel.getPagedListLiveData().observe(getViewLifecycleOwner(), new Observer<PagedList<Result>>() {
             @Override
-            public void OnItemCLick(int position) {
+            public void onChanged(PagedList<Result> results) {
+                planetsAdapterNew.submitList(results);
+            }
+        });
+        planetsAdapterNew.setOnItemCLickListener(new OnItemCLickListener() {
+            @Override
+            public void OnItemClick(Object object) {
                 Intent intent = new Intent(root.getContext(), PlanetActivity.class);
-                Gson gson = new Gson();
-                String jsonPlanet = gson.toJson(presenter.getPlanetItem(position));
+                String jsonPlanet = new Gson().toJson(object);
                 intent.putExtra("PLANET", jsonPlanet);
                 startActivity(intent);
             }
         });
-        presenter.getPlanetsList(page);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                visibleItemCount = linearLayoutManager.getChildCount();
-                totalItemCount = linearLayoutManager.getItemCount();
-                firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
-                if (((visibleItemCount + firstVisibleItem) >= totalItemCount) && !presenter.isLastPage()) {
-                    presenter.getPlanetsList(++page);
-                }
-            }
-        });
+        recyclerView.setAdapter(planetsAdapterNew);
+
         return root;
-    }
-
-    @Override
-    public void setPlanetsAdapter(List<Result> resultList) {
-        planetsAdapter.setResultList(resultList);
-        recyclerView.setAdapter(planetsAdapter);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        presenter.compositeDispos();
     }
 
 }

@@ -56,7 +56,7 @@ public class PlanetsAdapter extends RecyclerView.Adapter<PlanetsAdapter.PlanetsA
                 @Override
                 public void onClick(View v) {
                     if (onItemCLickListener != null) {
-                        onItemCLickListener.OnItemCLick(getAbsoluteAdapterPosition());
+                        onItemCLickListener.OnItemCLick(getAdapterPosition());
                     }
                 }
             });

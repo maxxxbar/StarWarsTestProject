@@ -9,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.OnApplyWindowInsetsListener;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.starwars.R;
+import com.example.starwars.databinding.ActivityPlanetBinding;
 import com.example.starwars.entries.planets.Result;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -20,38 +22,21 @@ import java.lang.reflect.Type;
 public class PlanetActivity extends AppCompatActivity
         implements PlanetActivityView {
 
-
-    private com.google.android.material.textview.MaterialTextView textViewRotationPeriod;
-    private com.google.android.material.textview.MaterialTextView textViewOrbitalPeriod;
-    private com.google.android.material.textview.MaterialTextView textViewDiameter;
-    private com.google.android.material.textview.MaterialTextView textViewPlanetClimate;
-    private com.google.android.material.textview.MaterialTextView textViewGravity;
-    private com.google.android.material.textview.MaterialTextView textViewTerrain;
-    private com.google.android.material.textview.MaterialTextView textViewSurfaceWater;
-    private com.google.android.material.textview.MaterialTextView textViewPopulation;
     private com.google.android.material.textview.MaterialTextView textViewResidents;
     private com.google.android.material.textview.MaterialTextView textViewFilms;
 
     private PlanetActivityPresenter presenter;
+    private ActivityPlanetBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_planet);
-
-        textViewRotationPeriod = findViewById(R.id.textViewRotationPeriod);
-        textViewOrbitalPeriod = findViewById(R.id.textViewOrbitalPeriod);
-        textViewDiameter = findViewById(R.id.textViewDiameter);
-        textViewPlanetClimate = findViewById(R.id.textViewPlanetClimate);
-        textViewGravity = findViewById(R.id.textViewGravity);
-        textViewTerrain = findViewById(R.id.textViewTerrain);
-        textViewSurfaceWater = findViewById(R.id.textViewSurfaceWater);
-        textViewPopulation = findViewById(R.id.textViewPopulation);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_planet);
+        View view = binding.getRoot().getRootView();
         textViewResidents = findViewById(R.id.textViewResidents);
         textViewFilms = findViewById(R.id.textViewFilms);
 
         presenter = new PlanetActivityPresenter(this);
-        View view = findViewById(android.R.id.content).getRootView();
         view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
         view.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
             @Override
@@ -70,10 +55,8 @@ public class PlanetActivity extends AppCompatActivity
         Intent intent = getIntent();
         if (intent != null) {
             String s = intent.getStringExtra("PLANET");
-            Type type = new TypeToken<Result>() {
-            }.getType();
-            Gson gson = new Gson();
-            Result result = gson.fromJson(s, type);
+            Type type = new TypeToken<Result>() {}.getType();
+            Result result = new Gson().fromJson(s, type);
             if (result != null) {
                 for (int i = 0; i < result.getFilms().size(); i++) {
                     String films = result.getFilms().get(i).trim();
@@ -91,18 +74,9 @@ public class PlanetActivity extends AppCompatActivity
                         presenter.getResidents(residentID);
                     }
                 }
-                textViewRotationPeriod.setText(result.getRotationPeriod());
-                textViewOrbitalPeriod.setText(result.getOrbitalPeriod());
-                textViewDiameter.setText(result.getDiameter());
-                textViewPlanetClimate.setText(result.getClimate());
-                textViewGravity.setText(result.getGravity());
-                textViewTerrain.setText(result.getTerrain());
-                textViewSurfaceWater.setText(result.getSurfaceWater());
-                textViewPopulation.setText(result.getPopulation());
+                binding.setActivityPlanet(result);
             }
         }
-
-
     }
 
     @Override
