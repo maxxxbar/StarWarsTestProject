@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+
     compileSdkVersion 29
     buildToolsVersion '30.0.1'
 
@@ -8,6 +9,10 @@ android {
         viewBinding = true
         dataBinding = true
     }
+
+    compileSdkVersion 30
+    buildToolsVersion '29.0.3'
+
 
     defaultConfig {
         applicationId "com.example.starwars"
@@ -72,4 +77,6 @@ dependencies {
     // optional - RxJava support
     implementation "androidx.paging:paging-rxjava2:$paging_version"
     // For Kotlin use paging-rxjava2-ktx
+
+
 }
