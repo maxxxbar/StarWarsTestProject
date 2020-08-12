@@ -44,11 +44,8 @@ public class FirstFragment extends Fragment {
                 .create(FirstFragmentViewModel.class);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(root.getContext());
-        LinearSnapHelper snapHelper = new LinearSnapHelper();
-
         recyclerView = binding.recyclerViewPlanets;
         recyclerView.setLayoutManager(linearLayoutManager);
-        snapHelper.attachToRecyclerView(recyclerView);
         planetsAdapterNew = new PlanetsAdapterNew();
         viewModel.getPagedListLiveData().observe(getViewLifecycleOwner(), new Observer<PagedList<Result>>() {
             @Override
