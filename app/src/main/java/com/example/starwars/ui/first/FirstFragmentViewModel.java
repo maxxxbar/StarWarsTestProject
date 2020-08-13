@@ -8,8 +8,10 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.library.baseAdapters.BR;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
@@ -31,13 +33,12 @@ public class FirstFragmentViewModel extends AndroidViewModel {
     private LiveData<PlanetsListDataSource> dataSourceLiveData;
     private LiveData<PagedList<Result>> pagedListLiveData;
     private PlanetsListDataSourceFactory planetsListDataSourceFactory;
-    private MutableLiveData<Boolean> isLoading;
 
     public FirstFragmentViewModel(@NonNull Application application) {
         super(application);
         connection = APIConnection.getInstance();
         api = connection.createGet();
-        planetsListDataSourceFactory = new PlanetsListDataSourceFactory( api);
+        planetsListDataSourceFactory = new PlanetsListDataSourceFactory(api);
         dataSourceLiveData = planetsListDataSourceFactory.getMutableLiveData();
 
         PagedList.Config config = new PagedList.Config.Builder()
@@ -50,18 +51,10 @@ public class FirstFragmentViewModel extends AndroidViewModel {
         pagedListLiveData = new LivePagedListBuilder<>(planetsListDataSourceFactory, config)
                 .setFetchExecutor(executor)
                 .build();
-        isLoading = new MutableLiveData<>();
     }
 
     public LiveData<PagedList<Result>> getPagedListLiveData() {
         return pagedListLiveData;
     }
 
-    public LiveData<Boolean> isLoading() {
-        return isLoading;
-    }
-
-    public void setIsLoading(boolean isLoading) {
-        this.isLoading.postValue(isLoading);
-    }
 }

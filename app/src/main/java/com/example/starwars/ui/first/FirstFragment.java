@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.paging.PagedList;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +21,10 @@ import com.example.starwars.adapters.planets.PlanetsAdapterNew;
 import com.example.starwars.databinding.FragmentFirstBinding;
 import com.example.starwars.entries.planets.Result;
 import com.example.starwars.ui.planetactivity.PlanetActivity;
+import com.example.starwars.ui.planetactivity.PlanetActivityViewModel;
 import com.google.gson.Gson;
+
+import java.util.Objects;
 
 public class FirstFragment extends Fragment {
 
@@ -30,9 +32,6 @@ public class FirstFragment extends Fragment {
     private FragmentFirstBinding binding;
     private PlanetsAdapterNew planetsAdapterNew;
     private RecyclerView recyclerView;
-    private final String TAG = getClass().getSimpleName();
-
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,15 +41,12 @@ public class FirstFragment extends Fragment {
 
         viewModel = ViewModelProvider
                 .AndroidViewModelFactory
-                .getInstance(getActivity().getApplication())
+                .getInstance(requireActivity().getApplication())
                 .create(FirstFragmentViewModel.class);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(root.getContext());
-        LinearSnapHelper snapHelper = new LinearSnapHelper();
-
         recyclerView = binding.recyclerViewPlanets;
         recyclerView.setLayoutManager(linearLayoutManager);
-        snapHelper.attachToRecyclerView(recyclerView);
         planetsAdapterNew = new PlanetsAdapterNew();
         viewModel.getPagedListLiveData().observe(getViewLifecycleOwner(), new Observer<PagedList<Result>>() {
             @Override
