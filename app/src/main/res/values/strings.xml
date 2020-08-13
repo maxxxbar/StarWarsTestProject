@@ -14,6 +14,7 @@
     <string name="planets_list_residents">Residents:</string>
     <string name="planets_list_films">Films:</string>
     <string name="people_root_list_name">Name:</string>
+    <string name="no_information_msg">No information</string>
 
 
 </resources>

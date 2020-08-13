@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 import androidx.paging.PageKeyedDataSource;
 
 import com.example.starwars.databinding.FragmentFirstBinding;
@@ -26,24 +27,20 @@ public class PlanetsListDataSource extends PageKeyedDataSource<Integer, Result> 
 
     private final String TAG = getClass().getSimpleName();
     private RestAPI restAPI;
-    private Application application;
 
-    public PlanetsListDataSource( RestAPI restAPI) {
+    public PlanetsListDataSource(RestAPI restAPI) {
         this.restAPI = restAPI;
     }
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Result> callback) {
         List<Result> resultList = new ArrayList<>();
-        LoadingStatus loadingStatus = LoadingStatus.getInstance();
         restAPI.getPlanetsResult(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Planets>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        loadingStatus.setLoading(true);
-                        Log.d(TAG, "onSubscribe: " + loadingStatus.isLoading());
                     }
 
                     @Override
@@ -58,10 +55,7 @@ public class PlanetsListDataSource extends PageKeyedDataSource<Integer, Result> 
 
                     @Override
                     public void onComplete() {
-                        loadingStatus.setLoading(false);
                         callback.onResult(resultList, null, 2);
-                        Log.d(TAG, "onComplete: " + loadingStatus.isLoading());
-
                     }
                 });
     }
@@ -74,16 +68,12 @@ public class PlanetsListDataSource extends PageKeyedDataSource<Integer, Result> 
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Result> callback) {
         List<Result> resultList = new ArrayList<>();
-        LoadingStatus loadingStatus = LoadingStatus.getInstance();
         restAPI.getPlanetsResult(params.key)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Planets>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        loadingStatus.setLoading(true);
-                        Log.d(TAG, "onSubscribe: " + loadingStatus.isLoading());
-
                     }
 
                     @Override
@@ -99,11 +89,9 @@ public class PlanetsListDataSource extends PageKeyedDataSource<Integer, Result> 
                     @Override
                     public void onComplete() {
                         callback.onResult(resultList, params.key + 1);
-                        loadingStatus.setLoading(false);
-                        Log.d(TAG, "onComplete: " + loadingStatus.isLoading());
-
                     }
                 });
     }
+
 }
 

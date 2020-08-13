@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -8,9 +10,7 @@
             type="com.example.starwars.entries.planets.Result" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewPlanet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -115,7 +115,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_view_all_margin"
                     android:text="@string/planets_list_films"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewResidents" />
 
@@ -194,18 +193,25 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewResidents"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    app:layout_constraintStart_toEndOf="@+id/viewResidents"
+                    android:layout_height="wrap_content"
+                    android:text='@{activityPlanet.residents.get(0) ?? ""}'
+                    app:layout_constraintStart_toEndOf="@+id/guideline"
                     app:layout_constraintTop_toBottomOf="@+id/viewResidents" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewFilms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/viewResidents"
+                    android:text='@{activityPlanet.films.get(0) ?? ""}'
+                    app:layout_constraintStart_toEndOf="@+id/guideline"
                     app:layout_constraintTop_toBottomOf="@+id/viewFilms" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.2" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
